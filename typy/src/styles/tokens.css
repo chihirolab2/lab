@@ -1,0 +1,71 @@
+/* =========================================================
+   TYPY Design Tokens
+   ラベンダー × 淡いブルー × ミント × ホワイト
+   ========================================================= */
+:root {
+  /* text */
+  --ink: #4a4572;
+  --ink-2: #6e6a93;
+  --ink-3: #9a96b8;
+  --ink-4: #bcb8d4;
+
+  /* brand */
+  --lavender-50: #f6f3ff;
+  --lavender-100: #ece7fc;
+  --lavender-200: #ddd5fa;
+  --lavender-300: #c8bcf3;
+  --lavender-400: #ad9ded;
+  --lavender-500: #8f7fde;
+  --lavender-600: #7466c6;
+  --blue-100: #e5f1fb;
+  --blue-200: #cfe5f7;
+  --blue-300: #a9d3ef;
+  --mint-100: #e6f6ef;
+  --mint-300: #b5e3cf;
+  --pink-200: #f9d4e0;
+  --pink-400: #f19bb6;
+  --gold-300: #f6d57f;
+
+  /* surfaces */
+  --bg-top: #ebe6fb;
+  --bg-mid: #f2f0fd;
+  --bg-bottom: #ecf3fc;
+  --card: rgba(255, 255, 255, 0.74);
+  --card-solid: #ffffff;
+  --card-border: rgba(255, 255, 255, 0.95);
+  --line: rgba(160, 148, 214, 0.22);
+
+  /* gradients */
+  --grad-primary: linear-gradient(95deg, #9fd2ea 0%, #b2b9ef 52%, #c3a7ee 100%);
+  --grad-lavender: linear-gradient(95deg, #c9b9f3 0%, #ab9be9 100%);
+  --grad-progress: linear-gradient(90deg, #a4dbe9 0%, #a7b5ef 55%, #b9a0ee 100%);
+  --grad-sky: linear-gradient(180deg, #a9b8f0 0%, #c6c3f4 38%, #e7e0fb 70%, #f3eefc 100%);
+
+  /* shadow */
+  --shadow-card: 0 10px 30px -12px rgba(120, 104, 196, 0.28), 0 2px 6px rgba(120, 104, 196, 0.06);
+  --shadow-soft: 0 6px 18px -8px rgba(120, 104, 196, 0.3);
+  --shadow-button: 0 12px 26px -10px rgba(132, 120, 214, 0.65);
+
+  /* radius */
+  --r-xs: 10px;
+  --r-sm: 14px;
+  --r-md: 20px;
+  --r-lg: 26px;
+  --r-xl: 32px;
+  --r-pill: 999px;
+
+  /* spacing */
+  --gutter: 20px;
+  --tabbar-h: 78px;
+
+  /* type */
+  --font-jp: 'Zen Maru Gothic', 'Hiragino Maru Gothic ProN', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+  --font-num: 'Quicksand', 'Zen Maru Gothic', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+
+  /* group colors */
+  --analyst: #9a86dc;
+  --empath: #66b894;
+  --guardian: #679fdc;
+  --explorer: #e3a54d;
+}

@@ -1,0 +1,204 @@
+/* =========================================================
+   Base / Layout
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-jp);
+  color: var(--ink);
+  background: #e4def8;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  font-feature-settings: 'palt';
+  letter-spacing: 0.02em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: inherit;
+}
+button:disabled {
+  cursor: default;
+}
+:focus-visible {
+  outline: 2px solid var(--lavender-400);
+  outline-offset: 2px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+svg {
+  display: block;
+}
+
+/* ---- Stage (デスクトップではスマホ枠で表示) ---- */
+.stage {
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  background:
+    radial-gradient(1200px 600px at 10% 0%, #f3eefe 0%, transparent 60%),
+    radial-gradient(900px 600px at 100% 100%, #e3f0fb 0%, transparent 60%),
+    #e8e2f9;
+}
+
+.phone {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 100dvh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+@media (min-width: 600px) {
+  .stage {
+    align-items: center;
+    padding: 24px;
+  }
+  .phone {
+    height: min(900px, calc(100dvh - 48px));
+    border-radius: 44px;
+    box-shadow:
+      0 0 0 10px #fbfaff,
+      0 0 0 11px #dcd4f5,
+      0 40px 80px -30px rgba(90, 70, 170, 0.45);
+  }
+}
+
+/* ---- 背景（空・雲） ---- */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+  overflow: hidden;
+}
+.bg__cloud {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  opacity: 0.9;
+}
+.bg__cloud--1 {
+  width: 320px;
+  height: 180px;
+  top: -40px;
+  left: -80px;
+  background: #fbf9ff;
+}
+.bg__cloud--2 {
+  width: 280px;
+  height: 200px;
+  top: 38%;
+  right: -120px;
+  background: #e2eefb;
+}
+.bg__cloud--3 {
+  width: 360px;
+  height: 220px;
+  bottom: -60px;
+  left: -60px;
+  background: #e8f6f1;
+  opacity: 0.7;
+}
+
+.viewport {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  padding-bottom: calc(var(--tabbar-h) + 24px + env(safe-area-inset-bottom));
+  scrollbar-width: none;
+}
+.viewport::-webkit-scrollbar {
+  display: none;
+}
+.viewport--immersive {
+  padding-bottom: 0;
+}
+
+.screen {
+  position: relative;
+  min-height: 100%;
+  padding: calc(env(safe-area-inset-top) + 12px) var(--gutter) 0;
+  animation: screen-in 0.35s ease both;
+}
+@keyframes screen-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ---- Typography helpers ---- */
+.eyebrow {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink-3);
+}
+.body-text {
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink-2);
+}
+.muted {
+  color: var(--ink-4);
+}
+.muted-text {
+  color: var(--ink-3);
+  font-size: 12px;
+}
+.small {
+  font-size: 11px;
+  margin-top: 10px;
+}
+.center {
+  display: flex;
+  justify-content: center;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.empty {
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 13px;
+  padding: 24px 0;
+}
+.disclaimer {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ink-3);
+  margin: 20px 4px 8px;
+}
