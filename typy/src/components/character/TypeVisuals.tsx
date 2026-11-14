@@ -2,11 +2,30 @@ import type { CSSProperties } from 'react';
 import { getProfile, splitCode } from '../../data/catalog';
 import type { TypeCode } from '../../data/model';
 import { Icon } from '../ui/Icon';
+import { characterImageUrl } from '../../data/characterAssets';
 import { CharacterArt } from './CharacterArt';
 
 /** タイプコードからキャラクターを描画 */
 export function Portrait({ code, crop = 'bust', silhouette, silhouetteColor, className }: { code: TypeCode; crop?: 'bust' | 'face' | 'hero'; silhouette?: boolean; silhouetteColor?: string; className?: string }) {
   const p = getProfile(code);
+  const color = silhouetteColor ?? mix(p.group.color, '#d9d4f0', 0.32);
+  const url = characterImageUrl(code);
+
+  // 個別画像がある場合は画像で表示（透過画像のアルファをマスクにしてシルエット化）
+  if (url) {
+    const cls = `char-img char-img--${crop} ${className ?? ''}`;
+    return silhouette ? (
+      <span
+        className={`${cls} char-img--silhouette`}
+        role="img"
+        aria-label="未発見のタイプ"
+        style={{ background: color, WebkitMaskImage: `url(${url})`, maskImage: `url(${url})` }}
+      />
+    ) : (
+      <img className={cls} src={url} alt={`${p.code} ${p.title}`} loading="lazy" decoding="async" draggable={false} />
+    );
+  }
+
   return (
     <CharacterArt
       spec={p.base.character}
@@ -14,7 +33,7 @@ export function Portrait({ code, crop = 'bust', silhouette, silhouetteColor, cla
       cs={p.cs}
       crop={crop}
       silhouette={silhouette}
-      silhouetteColor={silhouetteColor ?? mix(p.group.color, '#d9d4f0', 0.32)}
+      silhouetteColor={color}
       className={className}
       title={silhouette ? '未発見のタイプ' : `${p.code} ${p.title}`}
     />
