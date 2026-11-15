@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import { getProfile, splitCode } from '../../data/catalog';
 import type { TypeCode } from '../../data/model';
 import { Icon } from '../ui/Icon';
-import { characterImageUrl } from '../../data/characterAssets';
+import { characterImageUrl, IMAGE_HAS_BACKGROUND } from '../../data/characterAssets';
 import { CharacterArt } from './CharacterArt';
 
 /** タイプコードからキャラクターを描画 */
@@ -12,6 +12,18 @@ export function Portrait({ code, crop = 'bust', silhouette, silhouetteColor, cla
   const url = characterImageUrl(code);
 
   // 個別画像がある場合は画像で表示（透過画像のアルファをマスクにしてシルエット化）
+  if (url && IMAGE_HAS_BACKGROUND) {
+    return (
+      <img
+        className={`char-img char-img--${crop} char-img--opaque ${silhouette ? 'char-img--locked' : ''} ${className ?? ''}`}
+        src={url}
+        alt={silhouette ? '未発見のタイプ' : `${p.code} ${p.title}`}
+        loading="lazy"
+        decoding="async"
+        draggable={false}
+      />
+    );
+  }
   if (url) {
     const cls = `char-img char-img--${crop} ${className ?? ''}`;
     return silhouette ? (

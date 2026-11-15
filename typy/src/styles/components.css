@@ -771,3 +771,45 @@
 .avatar__art.char-img--silhouette {
   aspect-ratio: auto;
 }
+
+/* ---- 背景つき画像（IMAGE_HAS_BACKGROUND）---- */
+.char-img--opaque {
+  object-fit: cover;
+  object-position: 50% 14%;
+  border-radius: 22px;
+  aspect-ratio: 4 / 5;
+  background: var(--lavender-100);
+}
+.char-img--opaque.char-img--face {
+  border-radius: 0;
+  aspect-ratio: auto;
+  transform: scale(1.22);
+  transform-origin: 50% 22%;
+}
+.char-img--locked {
+  opacity: 0;
+}
+.type-card.is-locked .type-card__art {
+  position: relative;
+}
+.type-card.is-locked .type-card__art::after,
+.avatar:has(.char-img--locked)::after {
+  content: '?';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding-bottom: 6%;
+  font-family: var(--font-num);
+  font-weight: 700;
+  font-size: 30px;
+  color: color-mix(in srgb, var(--g) 45%, #fff);
+}
+.avatar:has(.char-img--locked)::after {
+  font-size: 1.4em;
+}
+.type-card__art .char-img--opaque {
+  border-radius: 0;
+  aspect-ratio: auto;
+  transform: scale(1.06);
+}

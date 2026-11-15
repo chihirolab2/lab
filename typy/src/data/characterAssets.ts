@@ -28,3 +28,10 @@ export function characterImageUrl(code: TypeCode): string | null {
 export function availableCharacterImages(): string[] {
   return [...byName.keys()];
 }
+
+/**
+ * 画像に背景が含まれる（透過でない）場合は true。
+ * true のときは、角丸のカード画像として表示し、未発見タイプはぼかして表示します。
+ * 背景透過の画像に差し替えたら false にしてください。
+ */
+export const IMAGE_HAS_BACKGROUND = true;
