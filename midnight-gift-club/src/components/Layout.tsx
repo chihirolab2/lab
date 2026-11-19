@@ -3,7 +3,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from '../store';
 import { BackIcon, BellIcon, CrownIcon, HomeIcon, MenuIcon, SendIcon, TicketIcon } from './Icons';
 
-export type Tone = 'night' | 'day';
+export type Tone = 'night' | 'dusk' | 'blush' | 'bokeh';
 
 interface ScreenProps {
   tone: Tone;
@@ -13,14 +13,16 @@ interface ScreenProps {
   /** 右上に通知ベルとメニューを表示 */
   actions?: boolean;
   hideTabs?: boolean;
+  /** 夜空にピンクの光をにじませる（リクエスト送信画面） */
+  glow?: boolean;
   children: ReactNode;
 }
 
-export function Screen({ tone, title, back, actions, hideTabs, children }: ScreenProps) {
+export function Screen({ tone, title, back, actions, hideTabs, glow, children }: ScreenProps) {
   const navigate = useNavigate();
   const { unreadCount } = useApp();
   return (
-    <div className={`screen screen--${tone}`}>
+    <div className={`screen screen--${tone}${glow ? ' screen--glow' : ''}`}>
       <header className="topbar">
         <div className="topbar__side">
           {back !== undefined && (
@@ -55,10 +57,10 @@ function TabBar() {
   const { pathname } = useLocation();
   const requestBadge = state.role === 'giver' ? pendingRequestCount : 0;
   const tabs = [
-    { to: '/', label: 'HOME', icon: <HomeIcon />, end: true, active: pathname === '/' },
-    { to: '/tickets', label: 'TICKETS', icon: <TicketIcon />, active: pathname.startsWith('/tickets') },
-    { to: '/request', label: 'REQUEST', icon: <SendIcon />, active: pathname.startsWith('/request'), badge: requestBadge },
-    { to: '/stamp', label: 'STAMP', icon: <CrownIcon />, active: pathname.startsWith('/stamp') },
+    { to: '/', label: 'ホーム', icon: <HomeIcon />, end: true, active: pathname === '/' },
+    { to: '/tickets', label: 'チケット', icon: <TicketIcon />, active: pathname.startsWith('/tickets') },
+    { to: '/request', label: 'リクエスト', icon: <SendIcon />, active: pathname.startsWith('/request'), badge: requestBadge },
+    { to: '/stamp', label: 'スタンプ', icon: <CrownIcon />, active: pathname.startsWith('/stamp') },
   ];
   return (
     <nav className="tabbar" aria-label="メインメニュー">

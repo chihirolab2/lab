@@ -23,8 +23,8 @@ export function TicketForm() {
     ? { title: editing.title, category: editing.category, theme: editing.theme, description: editing.description, terms: editing.terms, expiryDate: editing.expiryDate }
     : {
         title: fromRequest?.title ? `${fromRequest.title}券` : '',
-        category: fromRequest ? themeForRequest(fromRequest.category) : 'CAFE',
-        theme: fromRequest ? themeForRequest(fromRequest.category) : 'CAFE',
+        category: fromRequest ? themeForRequest(fromRequest.category, fromRequest.title) : 'CAFE',
+        theme: fromRequest ? themeForRequest(fromRequest.category, fromRequest.title) : 'CAFE',
         description: fromRequest?.message ?? '',
         terms: '',
         expiryDate: null,
@@ -38,14 +38,14 @@ export function TicketForm() {
 
   if (state.role !== 'giver') {
     return (
-      <Screen tone="day" title="チケット" back="/tickets">
+      <Screen tone="blush" title="チケット" back="/tickets">
         <p className="empty">チケットの作成・編集は贈り主の画面で行えます。MY PAGE で切り替えてください。</p>
       </Screen>
     );
   }
   if (id && (!editing || editing.status === 'used')) {
     return (
-      <Screen tone="day" title="チケット" back="/tickets">
+      <Screen tone="blush" title="チケット" back="/tickets">
         <p className="empty">このチケットは編集できません。</p>
       </Screen>
     );
@@ -75,7 +75,7 @@ export function TicketForm() {
   };
 
   return (
-    <Screen tone="day" title={editing ? 'チケットを編集' : fromRequest ? 'リクエストをチケットに' : 'チケットを作成'} back={-1} hideTabs>
+    <Screen tone="blush" title={editing ? 'チケットを編集' : fromRequest ? 'リクエストをチケットに' : 'チケットを作成'} back={-1} hideTabs>
       <form className="form" onSubmit={submit}>
         {fromRequest && (
           <div className="card quote">

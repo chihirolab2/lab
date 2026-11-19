@@ -150,7 +150,7 @@ const CupIcon = (p: IconProps) => (
   </Svg>
 );
 
-const PlaneIcon = (p: IconProps) => (
+export const PlaneIcon = (p: IconProps) => (
   <Svg {...p}>
     <path d="M21 4.2c.4-.8-.6-1.8-1.4-1.4L15 5.5 6 3.8 4.8 5l6.2 3.7-3.3 3.3-3.2-.5L3.3 12.8l3.4 1.5 1.5 3.4 1.3-1.2-.5-3.2 3.3-3.3L16 20.2l1.2-1.2L15.5 10l4.5-4.6Z" />
   </Svg>
@@ -164,7 +164,7 @@ const FilmIcon = (p: IconProps) => (
   </Svg>
 );
 
-const ForkIcon = (p: IconProps) => (
+export const ForkIcon = (p: IconProps) => (
   <Svg {...p}>
     <path d="M7 3v7a2 2 0 0 0 2 2v9M11 3v7a2 2 0 0 1-2 2M5 3v5" />
     <path d="M17 21V3c-2.2 1.2-3.5 3.8-3.5 7 0 1.7.9 2.6 2 2.8" />
@@ -203,4 +203,23 @@ export function ThemeIcon({ theme, size = 36, className }: { theme: ThemeKey; si
     case 'PREMIUM':
       return <CrownIcon {...p} />;
   }
+}
+
+export const StarIcon = (p: IconProps) => (
+  <Svg {...p}>
+    <path d="m12 3.8 2.5 5.2 5.7.8-4.1 4 1 5.7-5.1-2.7-5.1 2.7 1-5.7-4.1-4 5.7-.8Z" />
+  </Svg>
+);
+
+/** スタンプ用の塗りのクラウン（先端に玉つき） */
+export function CrownFill({ size = 24, className }: IconProps) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" className={className} aria-hidden="true" fill="currentColor">
+      <circle cx="12" cy="4.6" r="1.5" />
+      <circle cx="3.6" cy="8.2" r="1.3" />
+      <circle cx="20.4" cy="8.2" r="1.3" />
+      <path d="M4.2 9.2 8 12.3 12 6l4 6.3 3.8-3.1-1.6 8H5.8Z" />
+      <rect x="5.6" y="18.6" width="12.8" height="2" rx="1" />
+    </svg>
+  );
 }

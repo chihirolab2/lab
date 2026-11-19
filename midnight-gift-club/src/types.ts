@@ -23,7 +23,8 @@ export interface Ticket {
   sourceRequestId: string | null;
 }
 
-export type RequestCategory = 'CAFE' | 'TRAVEL' | 'MOVIE' | 'DINNER' | 'RELAX' | 'OTHER';
+/** 素材どおり：お出かけ / グルメ / おうち / その他 */
+export type RequestCategory = 'OUT' | 'FOOD' | 'HOME' | 'OTHER';
 export type RequestStatus = 'PENDING' | 'ACCEPTED' | 'ON_HOLD' | 'DECLINED' | 'COMPLETED';
 
 export interface TicketRequest {

@@ -42,7 +42,7 @@ export function createSeedState(): AppState {
   const requests: TicketRequest[] = [
     {
       id: 'seed-request-1',
-      category: 'CAFE',
+      category: 'FOOD',
       title: '新しくできたカフェに行きたい',
       message: '駅の近くにできたパンケーキのお店が気になっています。',
       preferredPlace: '',

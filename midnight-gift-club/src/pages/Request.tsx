@@ -1,6 +1,7 @@
-import { useState, type FormEvent } from 'react';
+import { useState, type FormEvent, type ReactNode } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChevronIcon, CheckIcon } from '../components/Icons';
+import { catArt } from '../assets/art';
+import { CheckIcon, ChevronIcon, ForkIcon, HomeIcon, PlaneIcon, StarIcon } from '../components/Icons';
 import { Screen, Sheet } from '../components/Layout';
 import { REQUEST_CATEGORIES, requestCategoryLabel } from '../data/themes';
 import { useApp } from '../store';
@@ -23,13 +24,20 @@ export function dateLabel(iso: string): string {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
+const CAT_ICON: Record<RequestCategory, ReactNode> = {
+  OUT: <PlaneIcon size={30} />,
+  FOOD: <ForkIcon size={30} />,
+  HOME: <HomeIcon size={30} />,
+  OTHER: <StarIcon size={30} />,
+};
+
 export function Request() {
   const navigate = useNavigate();
   const { state, actions, pendingRequestCount } = useApp();
   const isGiver = state.role === 'giver';
   const [tab, setTab] = useState<'send' | 'list'>(isGiver ? 'list' : 'send');
 
-  const [category, setCategory] = useState<RequestCategory>('CAFE');
+  const [category, setCategory] = useState<RequestCategory>('OUT');
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [place, setPlace] = useState('');
@@ -46,7 +54,7 @@ export function Request() {
   };
 
   return (
-    <Screen tone={tab === 'send' ? 'night' : 'day'} title="リクエスト" actions>
+    <Screen tone={tab === 'send' ? 'night' : 'blush'} glow={tab === 'send'} title="リクエスト" actions>
       <div className="segmented" role="tablist">
         <button role="tab" aria-selected={tab === 'send'} className={tab === 'send' ? 'is-active' : ''} onClick={() => setTab('send')}>
           送る
@@ -59,13 +67,14 @@ export function Request() {
 
       {tab === 'send' ? (
         <form className="form" onSubmit={submit}>
-          <p className="muted center">一緒にやりたいことを教えてください♡</p>
+          <p className="form__lead">一緒にやりたいことを教えてください♡</p>
           <fieldset>
             <legend>カテゴリを選択</legend>
-            <div className="chips chips--request">
+            <div className="cat-tiles">
               {REQUEST_CATEGORIES.map((c) => (
-                <button type="button" key={c.key} className={`chip${category === c.key ? ' is-active' : ''}`} aria-pressed={category === c.key} onClick={() => setCategory(c.key)}>
-                  {c.jp}
+                <button type="button" key={c.key} className={`cat-tile${category === c.key ? ' is-active' : ''}`} aria-pressed={category === c.key} onClick={() => setCategory(c.key)}>
+                  {CAT_ICON[c.key]}
+                  <span>{c.jp}</span>
                 </button>
               ))}
             </div>
@@ -82,9 +91,10 @@ export function Request() {
             <span>行きたい場所（任意）</span>
             <input value={place} onChange={(e) => setPlace(e.target.value)} placeholder="例：京都" maxLength={40} />
           </label>
-          <button className="btn btn--primary" type="submit" disabled={!title.trim()}>
-            送信する
+          <button className="btn btn--rose" type="submit" disabled={!title.trim()}>
+            送信する <ChevronIcon size={16} />
           </button>
+          <img className="req-cat" src={catArt} alt="" draggable={false} />
         </form>
       ) : (
         <div className="stack">
@@ -135,7 +145,7 @@ export function RequestDetail() {
 
   if (!req) {
     return (
-      <Screen tone="day" title="リクエスト" back="/request">
+      <Screen tone="blush" title="リクエスト" back="/request">
         <p className="empty">リクエストが見つかりませんでした。</p>
       </Screen>
     );
@@ -153,7 +163,7 @@ export function RequestDetail() {
   };
 
   return (
-    <Screen tone="day" title="リクエスト" back="/request" hideTabs>
+    <Screen tone="blush" title="リクエスト" back="/request" hideTabs>
       <div className="detail">
         <div className="card info">
           <div className="row__meta">

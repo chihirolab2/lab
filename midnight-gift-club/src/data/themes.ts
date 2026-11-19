@@ -20,11 +20,9 @@ export const THEMES: Record<ThemeKey, ThemeInfo> = {
 export const SELECTABLE_THEMES: ThemeKey[] = ['CAFE', 'TRAVEL', 'MOVIE', 'DINNER', 'RELAX', 'SECRET'];
 
 export const REQUEST_CATEGORIES: { key: RequestCategory; jp: string }[] = [
-  { key: 'CAFE', jp: 'カフェ' },
-  { key: 'TRAVEL', jp: 'お出かけ' },
-  { key: 'MOVIE', jp: '映画' },
-  { key: 'DINNER', jp: 'グルメ' },
-  { key: 'RELAX', jp: 'おうち' },
+  { key: 'OUT', jp: 'お出かけ' },
+  { key: 'FOOD', jp: 'グルメ' },
+  { key: 'HOME', jp: 'おうち' },
   { key: 'OTHER', jp: 'その他' },
 ];
 
@@ -32,9 +30,21 @@ export function requestCategoryLabel(c: RequestCategory): string {
   return REQUEST_CATEGORIES.find((x) => x.key === c)?.jp ?? c;
 }
 
-/** リクエストのカテゴリから、採用時のチケットテーマの初期値を決める */
-export function themeForRequest(c: RequestCategory): ThemeKey {
-  return c === 'OTHER' ? 'SECRET' : c;
+/** リクエストの内容から、採用時のチケットデザインの初期値を決める（贈り主があとで変更できる） */
+export function themeForRequest(c: RequestCategory, title = ''): ThemeKey {
+  if (/カフェ|コーヒー|喫茶|パンケーキ|スイーツ/.test(title)) return 'CAFE';
+  if (/映画|シネマ/.test(title)) return 'MOVIE';
+  if (/旅行|旅|温泉|ドライブ/.test(title)) return 'TRAVEL';
+  switch (c) {
+    case 'OUT':
+      return 'TRAVEL';
+    case 'FOOD':
+      return 'DINNER';
+    case 'HOME':
+      return 'RELAX';
+    case 'OTHER':
+      return 'SECRET';
+  }
 }
 
 export const STAMP_TARGET = 10;

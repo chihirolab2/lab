@@ -12,7 +12,7 @@ export function Menu() {
   const [confirmReset, setConfirmReset] = useState(false);
 
   return (
-    <Screen tone="day" title="MY PAGE" back="/">
+    <Screen tone="blush" title="MY PAGE" back="/">
       <div className="stack">
         <section className="card form">
           <h2 className="section-title">いまの画面</h2>

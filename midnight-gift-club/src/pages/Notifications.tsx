@@ -20,7 +20,7 @@ export function Notifications() {
   };
 
   return (
-    <Screen tone="day" title="お知らせ" back={-1} hideTabs>
+    <Screen tone="blush" title="お知らせ" back={-1} hideTabs>
       {myNotifications.length > 0 && (
         <button className="link-btn right" onClick={() => actions.readAllNotifications()}>
           すべて既読にする

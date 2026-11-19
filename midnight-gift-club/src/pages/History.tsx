@@ -12,7 +12,7 @@ export function History() {
   const requests = state.requests.filter((r) => r.status !== 'PENDING');
 
   return (
-    <Screen tone="day" title="履歴" back="/menu" hideTabs>
+    <Screen tone="blush" title="履歴" back="/menu" hideTabs>
       <section className="stack">
         <h2 className="section-title">使用済みチケット</h2>
         {used.length === 0 && <p className="empty">まだ使ったチケットはありません。</p>}

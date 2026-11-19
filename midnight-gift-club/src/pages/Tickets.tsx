@@ -29,7 +29,7 @@ export function Tickets() {
     .sort((a, b) => Number(a.status === 'used') - Number(b.status === 'used') || b.serialNo - a.serialNo);
 
   return (
-    <Screen tone="day" title="チケット一覧" actions>
+    <Screen tone="dusk" title="チケット一覧" actions>
       <div className="segmented" role="tablist" aria-label="絞り込み">
         {FILTERS.map((f) => (
           <button key={f.key} role="tab" aria-selected={filter === f.key} className={filter === f.key ? 'is-active' : ''} onClick={() => setFilter(f.key)}>
@@ -44,7 +44,7 @@ export function Tickets() {
         ))}
         {list.length === 0 && <p className="empty">ここにはまだチケットがありません。</p>}
         {state.role === 'giver' && (
-          <button className="btn btn--ghost" onClick={() => navigate('/tickets/new')}>
+          <button className="btn btn--glass" onClick={() => navigate('/tickets/new')}>
             <PlusIcon size={18} /> チケットを追加する
           </button>
         )}

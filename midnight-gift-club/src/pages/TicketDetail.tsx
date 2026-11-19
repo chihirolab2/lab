@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { CalendarIcon, EditIcon, InfoIcon } from '../components/Icons';
+import { CalendarIcon, ChevronIcon, EditIcon, InfoIcon } from '../components/Icons';
 import { Screen, Sheet } from '../components/Layout';
 import { TicketCard, formatDate } from '../components/TicketCard';
 import { isExpired, useApp } from '../store';
@@ -14,7 +14,7 @@ export function TicketDetail() {
 
   if (!ticket) {
     return (
-      <Screen tone="day" title="チケット" back="/tickets">
+      <Screen tone="bokeh" title="チケット" back="/tickets">
         <p className="empty">チケットが見つかりませんでした。</p>
       </Screen>
     );
@@ -25,9 +25,11 @@ export function TicketDetail() {
   const isReceiver = state.role === 'receiver';
 
   return (
-    <Screen tone="day" title="チケット" back="/tickets" hideTabs>
+    <Screen tone="bokeh" title="チケット" back="/tickets" hideTabs>
       <div className="detail">
-        <TicketCard ticket={ticket} hero />
+        <div className="detail__ticket">
+          <TicketCard ticket={ticket} hero />
+        </div>
         <p className="detail__desc">{ticket.description}</p>
 
         <dl className="info card">
@@ -60,8 +62,8 @@ export function TicketDetail() {
             <p className="notice notice--warn">有効期限が過ぎています。贈り主に相談してみてね。</p>
           ) : (
             <>
-              <button className="btn btn--primary" onClick={() => setConfirm(true)}>
-                このチケットを使う
+              <button className="btn btn--rose" onClick={() => setConfirm(true)}>
+                このチケットを使う <ChevronIcon size={16} />
               </button>
               <button className="link-btn center" onClick={() => navigate('/tickets')}>
                 あとで使う
@@ -71,7 +73,7 @@ export function TicketDetail() {
         ) : (
           !used && (
             <>
-              <button className="btn btn--primary" onClick={() => navigate(`/tickets/${ticket.id}/edit`)}>
+              <button className="btn btn--rose" onClick={() => navigate(`/tickets/${ticket.id}/edit`)}>
                 <EditIcon size={18} /> このチケットを編集する
               </button>
               <p className="muted small center">チケットを使うのは受け取り側の画面です（MY PAGE で切り替えできます）。</p>

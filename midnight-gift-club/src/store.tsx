@@ -11,7 +11,7 @@ import type {
   TicketRequest,
 } from './types';
 
-const STORAGE_KEY = 'mgc.v1';
+const STORAGE_KEY = 'mgc.v2';
 
 export function uid(prefix: string): string {
   const r =

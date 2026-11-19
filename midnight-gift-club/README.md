@@ -12,8 +12,10 @@ midnight-gift-club/
 │  └─ design/
 │     ├─ moodboards/        デザイン方向性ボード 8点（方向性の参考。UIはコードで再構築）
 │     └─ references/        参考画像 2点
+├─ docs/preview/            実機サイズで撮った画面のプレビュー
 ├─ public/                  manifest・アイコン・service worker
 └─ src/
+   ├─ assets/art/           素材ボードから切り出したイラスト（チケットの絵柄・ギフトボックス・リボン・猫など）
    ├─ data/                 テーマ定義・初期データ
    ├─ components/           TicketCard / GiftBox / Layout / Celebration …
    ├─ pages/                HOME / TICKETS / 詳細・編集 / REQUEST / STAMP / 履歴 / 通知 / MY PAGE
@@ -57,3 +59,10 @@ iPhone は Safari の「共有 → ホーム画面に追加」、Android は Chr
 - 期限切れの未使用チケットは使えない（贈り主が期限を編集すれば再び使える）
 - リクエスト見送り時は「今回は見送りになりました。また教えてね」とやさしく表示
 - 通知はアプリ内のみ
+
+## 素材（イラスト）について
+
+`src/assets/art/` の画像は、`docs/design/moodboards/` のボードから切り出したものです。
+元のボード自体が小さい画像（1536×1024）なので、スマホの高精細画面ではイラストがやや柔らかく見えます。
+製品版では、生成元の高解像度データ（またはイラスト単体の書き出し）に差し替えるときれいになります。
+文字・ボタン・チケットの枠は、あとから編集できるようコードで作っています。
